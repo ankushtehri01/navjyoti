@@ -1,0 +1,18 @@
+/**
+ * Cloudinary v2 client configuration.
+ * Actual upload/destroy logic lives in services/upload.service.js.
+ */
+import { v2 as cloudinary } from 'cloudinary';
+import { env } from './env.js';
+
+if (env.cloudinary.enabled) {
+  cloudinary.config({
+    cloud_name: env.cloudinary.cloudName,
+    api_key: env.cloudinary.apiKey,
+    api_secret: env.cloudinary.apiSecret,
+    secure: true,
+  });
+}
+
+export { cloudinary };
+export default cloudinary;

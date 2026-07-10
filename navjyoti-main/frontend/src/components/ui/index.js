@@ -1,0 +1,23 @@
+/** UI component library — single import site: `import { Button, Card } from '@/components/ui'`. */
+export { default as Button } from './Button.jsx';
+export { default as Input } from './Input.jsx';
+export { default as PasswordInput } from './PasswordInput.jsx';
+export { default as Textarea } from './Textarea.jsx';
+export { default as Select } from './Select.jsx';
+export { default as Checkbox } from './Checkbox.jsx';
+export { default as Container } from './Container.jsx';
+export { default as Card } from './Card.jsx';
+export { default as Badge } from './Badge.jsx';
+export { default as Spinner } from './Spinner.jsx';
+export { default as Skeleton, SkeletonText } from './Skeleton.jsx';
+export { default as Alert } from './Alert.jsx';
+export { default as Modal } from './Modal.jsx';
+export { default as ConfirmDialog } from './ConfirmDialog.jsx';
+export { default as Tabs } from './Tabs.jsx';
+export { default as Accordion } from './Accordion.jsx';
+export { default as Tooltip } from './Tooltip.jsx';
+export { default as EmptyState } from './EmptyState.jsx';
+export { default as SectionHeading } from './SectionHeading.jsx';
+export { default as StatCard } from './StatCard.jsx';
+export { default as Pagination } from './Pagination.jsx';
+export { default as Table } from './Table.jsx';
