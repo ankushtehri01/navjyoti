@@ -7,7 +7,7 @@ export const env = Object.freeze({
   appName: import.meta.env.VITE_APP_NAME || 'Nav Jyoti',
   // Digits only, country code first, no '+' or spaces (wa.me link format).
   // TODO: replace the fallback with your real WhatsApp Business number.
-  whatsappNumber: import.meta.env.VITE_WHATSAPP_NUMBER || '919876543210',
+  whatsappNumber: import.meta.env.VITE_WHATSAPP_NUMBER || '919896704299',
   isDev: import.meta.env.DEV,
   isProd: import.meta.env.PROD,
 });

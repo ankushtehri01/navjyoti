@@ -3,6 +3,7 @@ import { FiTwitter, FiLinkedin, FiFacebook, FiInstagram, FiMail, FiPhone } from 
 import Container from '@/components/ui/Container.jsx';
 import { FOOTER_LINKS, CONTACT } from '@/constants/site.js';
 import { ROUTES } from '@/constants/routes.js';
+import BrandLogo from '@/components/common/BrandLogo.jsx';
 
 const SOCIALS = [
   { icon: FiTwitter, href: '#', label: 'Twitter' },
@@ -17,8 +18,8 @@ const Footer = () => (
       <div className="grid gap-10 lg:grid-cols-5">
         {/* Brand */}
         <div className="lg:col-span-2">
-          <Link to={ROUTES.HOME} className="text-xl font-extrabold text-white">
-            Nav<span className="gradient-text">Jyoti</span>
+          <Link to={ROUTES.HOME} className="inline-flex items-center" aria-label="Nav Jyoti home">
+            <BrandLogo className="h-16 w-16 rounded-full" />
           </Link>
           <p className="mt-4 max-w-xs text-sm text-slate-400">
             Capital that keeps your goals moving forward — loans, cards, insurance,

@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FiMenu, FiX, FiChevronDown } from 'react-icons/fi';
+import { FiArrowRight, FiChevronDown, FiMenu, FiMessageSquare, FiX } from 'react-icons/fi';
 import { NAV_LINKS } from '@/constants/site.js';
 import { ROUTES } from '@/constants/routes.js';
 import { ROLES } from '@/constants/roles.js';
 import { useAppSelector } from '@/hooks/redux.js';
 import { selectIsAuthenticated, selectRole } from '@/redux/slices/authSlice.js';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside.js';
-import Button from '@/components/ui/Button.jsx';
+import BrandLogo from '@/components/common/BrandLogo.jsx';
 import { cn } from '@/utils/cn.js';
 
 const DesktopDropdown = ({ item }) => {
@@ -17,38 +17,65 @@ const DesktopDropdown = ({ item }) => {
   useOnClickOutside(ref, () => setOpen(false), open);
 
   return (
-    <div ref={ref} className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+    <div
+      ref={ref}
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onFocus={() => setOpen(true)}
+    >
       <button
         type="button"
-        className="focus-ring inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-300 transition hover:text-white"
+        className="focus-ring inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-[#f7f1e3] hover:text-[#a66b09]"
       >
         {item.label}
         <FiChevronDown size={14} className={cn('transition', open && 'rotate-180')} />
       </button>
       <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 8 }}
-            transition={{ duration: 0.15 }}
-            className="glass-strong absolute left-0 top-full mt-2 w-64 overflow-hidden rounded-2xl p-2 shadow-xl"
-          >
-            {item.children.map((child) => (
-              <Link
-                key={child.to}
-                to={child.to}
-                className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white"
-              >
-                {child.icon && (
-                  <span className="gradient-brand flex h-8 w-8 items-center justify-center rounded-lg text-white">
-                    <child.icon size={15} />
-                  </span>
-                )}
-                {child.label}
-              </Link>
-            ))}
-          </motion.div>
+          <div className="absolute left-1/2 top-full z-50 mt-3 w-[560px] -translate-x-1/2">
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              transition={{ duration: 0.16, ease: 'easeOut' }}
+              className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-2xl shadow-[#0b2545]/20"
+            >
+              <div className="grid grid-cols-2 gap-1">
+                {item.children.map((child) => (
+                  <Link
+                    key={child.to}
+                    to={child.to}
+                    className="group flex gap-3 rounded-xl p-3 transition hover:bg-[#fbf6ea]"
+                  >
+                    {child.icon && (
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#edf3fc] text-[#0b2545] transition group-hover:bg-[#f4dfad] group-hover:text-[#a66b09]">
+                        <child.icon size={18} />
+                      </span>
+                    )}
+                    <span>
+                      <span className="block text-sm font-bold text-[#102846]">{child.label}</span>
+                      <span className="mt-0.5 block text-xs leading-snug text-slate-500">{child.desc}</span>
+                    </span>
+                  </Link>
+                ))}
+              </div>
+              <div className="mt-3 flex items-center justify-between border-t border-slate-200 px-2 pt-3">
+                <Link
+                  to={ROUTES.EMI_CALCULATOR}
+                  className="focus-ring inline-flex items-center gap-2 rounded-lg px-2 py-2 text-sm font-bold text-[#102846] transition hover:text-[#a66b09]"
+                >
+                  <span className="text-[#c88c1d]">₹</span> EMI Calculator
+                </Link>
+                <Link
+                  to={ROUTES.GET_FUNDING}
+                  className="focus-ring inline-flex items-center gap-2 rounded-lg bg-[#d9a72f] px-4 py-2.5 text-sm font-bold text-[#102846] shadow-md shadow-[#d9a72f]/25 transition hover:bg-[#ebbe4d]"
+                >
+                  Get Funding <FiArrowRight size={15} />
+                </Link>
+              </div>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </div>
@@ -83,13 +110,32 @@ const Navbar = () => {
   return (
     <header
       className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-all duration-300',
-        scrolled ? 'glass-strong shadow-lg' : 'bg-transparent'
+        'fixed inset-x-0 top-0 z-50 border-b border-slate-200 bg-white transition-shadow duration-300',
+        scrolled && 'shadow-lg shadow-slate-900/10'
       )}
     >
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link to={ROUTES.HOME} className="text-xl font-extrabold text-white">
-          Nav<span className="gradient-text">Jyoti</span>
+      <div className="hidden bg-[#0b2545] text-white md:block">
+        <div className="mx-auto flex h-9 max-w-7xl items-center justify-between px-6 lg:px-8">
+          <p className="flex items-center gap-2 text-xs tracking-wide text-slate-200">
+            <FiMessageSquare className="text-[#e1ad38]" size={14} />
+            Expert financial advisory &amp; structured funding solutions
+          </p>
+          <Link
+            to={ROUTES.CONTACT}
+            className="focus-ring inline-flex items-center gap-2 rounded-md border border-[#d7a42c]/60 px-3 py-1 text-xs font-semibold text-[#f2c85e] transition hover:bg-[#d7a42c] hover:text-[#0b2545]"
+          >
+            Become a Channel Partner <FiArrowRight size={13} />
+          </Link>
+        </div>
+      </div>
+
+      <nav className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-4 sm:px-6 md:h-[76px] lg:px-8">
+        <Link to={ROUTES.HOME} className="flex items-center gap-2.5" aria-label="Nav Jyoti home">
+          <BrandLogo className="h-14 w-14 rounded-full md:h-16 md:w-16" />
+          <span className="hidden border-l border-slate-300 pl-2.5 leading-none sm:block">
+            <span className="block font-display text-xl font-extrabold tracking-[0.08em] text-[#0b2545]">NAVJYOTI</span>
+            <span className="mt-1 block text-[9px] font-bold tracking-[0.22em] text-[#bd8115]">WEALTH PVT LTD</span>
+          </span>
         </Link>
 
         {/* Desktop nav */}
@@ -103,8 +149,10 @@ const Navbar = () => {
                 to={item.to}
                 className={({ isActive }) =>
                   cn(
-                    'focus-ring rounded-lg px-3 py-2 text-sm font-medium transition',
-                    isActive ? 'text-white' : 'text-slate-300 hover:text-white'
+                    'focus-ring rounded-lg px-3 py-2 text-sm font-semibold transition',
+                    isActive
+                      ? 'bg-[#f7eddb] text-[#ae7110]'
+                      : 'text-slate-700 hover:bg-slate-50 hover:text-[#0b2545]'
                   )
                 }
               >
@@ -117,19 +165,20 @@ const Navbar = () => {
         {/* Desktop actions */}
         <div className="hidden items-center gap-3 lg:flex">
           {isAuthenticated ? (
-            <Button as={Link} to={dashboardTo} size="sm">
+            <Link to={dashboardTo} className="focus-ring rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">
               Dashboard
-            </Button>
+            </Link>
           ) : (
-            <>
-              <Button as={Link} to={ROUTES.LOGIN} variant="ghost" size="sm">
-                Sign In
-              </Button>
-              <Button as={Link} to={ROUTES.REGISTER} size="sm">
-                Get Started
-              </Button>
-            </>
+            <Link to={ROUTES.LOGIN} className="focus-ring rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">
+              Sign In
+            </Link>
           )}
+          <Link
+            to={ROUTES.GET_FUNDING}
+            className="focus-ring inline-flex items-center gap-2 rounded-lg bg-[#d9a72f] px-4 py-3 text-sm font-bold text-[#102846] shadow-md shadow-[#d9a72f]/25 transition hover:-translate-y-0.5 hover:bg-[#ebbe4d] hover:shadow-lg"
+          >
+            Get Funding <FiArrowRight size={16} />
+          </Link>
         </div>
 
         {/* Mobile toggle */}
@@ -138,7 +187,7 @@ const Navbar = () => {
           onClick={() => setMobileOpen((v) => !v)}
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
-          className="focus-ring rounded-lg p-2 text-white lg:hidden"
+          className="focus-ring rounded-lg p-2 text-[#0b2545] lg:hidden"
         >
           {mobileOpen ? <FiX size={22} /> : <FiMenu size={22} />}
         </button>
@@ -152,20 +201,20 @@ const Navbar = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="glass-strong overflow-hidden lg:hidden"
+            className="overflow-hidden border-t border-slate-200 bg-white shadow-xl lg:hidden"
           >
             <div className="max-h-[70vh] space-y-1 overflow-y-auto px-4 py-4">
               {NAV_LINKS.map((item) =>
                 item.children ? (
                   <div key={item.label} className="py-1">
-                    <p className="px-3 py-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                    <p className="px-3 py-2 text-xs font-bold uppercase tracking-wide text-[#a66b09]">
                       {item.label}
                     </p>
                     {item.children.map((child) => (
                       <Link
                         key={child.to}
                         to={child.to}
-                        className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-slate-300 hover:bg-white/5 hover:text-white"
+                        className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-[#f8f4e9] hover:text-[#0b2545]"
                       >
                         {child.icon && <child.icon size={16} />}
                         {child.label}
@@ -176,25 +225,25 @@ const Navbar = () => {
                   <NavLink
                     key={item.to}
                     to={item.to}
-                    className="block rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white"
+                    className="block rounded-lg px-3 py-2.5 text-sm font-semibold text-slate-700 hover:bg-[#f8f4e9] hover:text-[#0b2545]"
                   >
                     {item.label}
                   </NavLink>
                 )
               )}
-              <div className="grid grid-cols-2 gap-3 pt-3">
+              <div className="grid grid-cols-2 gap-3 border-t border-slate-200 pt-4">
                 {isAuthenticated ? (
-                  <Button as={Link} to={dashboardTo} fullWidth size="sm" className="col-span-2">
+                  <Link to={dashboardTo} className="col-span-2 rounded-lg bg-[#d9a72f] px-4 py-3 text-center text-sm font-bold text-[#102846]">
                     Dashboard
-                  </Button>
+                  </Link>
                 ) : (
                   <>
-                    <Button as={Link} to={ROUTES.LOGIN} variant="glass" fullWidth size="sm">
+                    <Link to={ROUTES.LOGIN} className="rounded-lg border border-slate-300 px-4 py-3 text-center text-sm font-bold text-slate-700">
                       Sign In
-                    </Button>
-                    <Button as={Link} to={ROUTES.REGISTER} fullWidth size="sm">
-                      Get Started
-                    </Button>
+                    </Link>
+                    <Link to={ROUTES.GET_FUNDING} className="rounded-lg bg-[#d9a72f] px-4 py-3 text-center text-sm font-bold text-[#102846]">
+                      Get Funding
+                    </Link>
                   </>
                 )}
               </div>

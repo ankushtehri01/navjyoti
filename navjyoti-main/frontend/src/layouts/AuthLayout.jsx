@@ -9,6 +9,7 @@ import { useAppSelector } from '@/hooks/redux.js';
 import { selectIsAuthenticated, selectRole } from '@/redux/slices/authSlice.js';
 import { ROUTES } from '@/constants/routes.js';
 import { ROLES } from '@/constants/roles.js';
+import BrandLogo from '@/components/common/BrandLogo.jsx';
 
 const highlights = [
   'Approvals in minutes, not weeks',
@@ -33,8 +34,8 @@ const AuthLayout = () => {
         <div className="gradient-brand absolute inset-0 opacity-90" />
         <div className="absolute inset-0 bg-ink-950/40" />
         <div className="relative z-10 flex flex-col justify-between p-12">
-          <Link to={ROUTES.HOME} className="text-2xl font-extrabold text-white">
-            Nav Jyoti
+          <Link to={ROUTES.HOME} className="inline-flex items-center" aria-label="Nav Jyoti home">
+            <BrandLogo className="h-20 w-20 rounded-full" />
           </Link>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -66,8 +67,8 @@ const AuthLayout = () => {
           className="w-full max-w-md"
         >
           <div className="mb-8 lg:hidden">
-            <Link to={ROUTES.HOME} className="text-2xl font-extrabold gradient-text">
-              Nav Jyoti
+            <Link to={ROUTES.HOME} className="inline-flex items-center" aria-label="Nav Jyoti home">
+              <BrandLogo className="h-20 w-20 rounded-full" />
             </Link>
           </div>
           <Outlet />

@@ -84,16 +84,16 @@ export const NAV_LINKS = [
   { label: 'About', to: ROUTES.ABOUT },
   {
     label: 'Loans',
-    children: LOAN_CATEGORIES.map((c) => ({ label: c.name, to: c.to, icon: c.icon })),
+    children: LOAN_CATEGORIES.map((c) => ({ label: c.name, to: c.to, icon: c.icon, desc: c.desc })),
   },
   {
     label: 'Services',
     children: [
-      { label: 'Credit Cards', to: ROUTES.CREDIT_CARDS, icon: FiCreditCard },
-      { label: 'Insurance', to: ROUTES.INSURANCE, icon: FiShield },
-      { label: 'Investments', to: ROUTES.INVESTMENTS, icon: FiTrendingUp },
-      { label: 'EMI Calculator', to: ROUTES.EMI_CALCULATOR, icon: FiPercent },
-      { label: 'Eligibility Check', to: ROUTES.ELIGIBILITY_CALCULATOR, icon: FiSearch },
+      { label: 'Credit Cards', to: ROUTES.CREDIT_CARDS, icon: FiCreditCard, desc: 'Compare rewarding cards for every lifestyle.' },
+      { label: 'Insurance', to: ROUTES.INSURANCE, icon: FiShield, desc: 'Protection plans for you and your family.' },
+      { label: 'Investments', to: ROUTES.INVESTMENTS, icon: FiTrendingUp, desc: 'Curated plans to help your money grow.' },
+      { label: 'EMI Calculator', to: ROUTES.EMI_CALCULATOR, icon: FiPercent, desc: 'Estimate a comfortable monthly repayment.' },
+      { label: 'Eligibility Check', to: ROUTES.ELIGIBILITY_CALCULATOR, icon: FiSearch, desc: 'See the financing options you qualify for.' },
     ],
   },
   { label: 'Blogs', to: ROUTES.BLOGS },

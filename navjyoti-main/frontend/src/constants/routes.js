@@ -24,6 +24,7 @@ export const ROUTES = Object.freeze({
   FAQ: '/faq',
   TESTIMONIALS: '/testimonials',
   CONTACT: '/contact',
+  GET_FUNDING: '/get-funding',
 
   // Auth
   LOGIN: '/login',

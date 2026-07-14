@@ -5,6 +5,7 @@ import { ROUTES } from '@/constants/routes.js';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux.js';
 import { selectSidebarOpen, setSidebar } from '@/redux/slices/uiSlice.js';
 import { cn } from '@/utils/cn.js';
+import BrandLogo from '@/components/common/BrandLogo.jsx';
 
 /**
  * Reusable dashboard sidebar. Static on desktop (lg+), slide-over drawer on
@@ -37,8 +38,8 @@ const NavItems = ({ nav, onNavigate }) => (
 const SidebarBody = ({ nav, onLogout, onNavigate, showClose, onClose }) => (
   <div className="flex h-full flex-col">
     <div className="flex h-16 items-center justify-between px-5">
-      <Link to={ROUTES.HOME} className="text-lg font-extrabold text-white" onClick={onNavigate}>
-        Nav<span className="gradient-text">Jyoti</span>
+      <Link to={ROUTES.HOME} className="flex items-center" aria-label="Nav Jyoti home" onClick={onNavigate}>
+        <BrandLogo className="h-12 w-12 rounded-full" />
       </Link>
       {showClose && (
         <button type="button" onClick={onClose} aria-label="Close sidebar" className="focus-ring rounded-lg p-1 text-slate-400 hover:text-white lg:hidden">

@@ -26,6 +26,7 @@ export const API = Object.freeze({
   REVIEWS: '/reviews',
   OFFERS: '/offers',
   CONTACTS: '/contacts',
+  FUNDING_INQUIRIES: '/funding-inquiries',
   NOTIFICATIONS: '/notifications',
   SETTINGS: '/settings',
   HEALTH: '/health',

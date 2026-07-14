@@ -21,6 +21,7 @@ const AdminLayout = lazy(() => import('@/layouts/AdminLayout.jsx'));
 const HomePage = lazy(() => import('@/pages/public/HomePage.jsx'));
 const PlaceholderPage = lazy(() => import('@/pages/public/PlaceholderPage.jsx'));
 const NotFoundPage = lazy(() => import('@/pages/public/NotFoundPage.jsx'));
+const FundingWizardPage = lazy(() => import('@/pages/public/FundingWizardPage.jsx'));
 
 // Auth
 const LoginPage = lazy(() => import('@/pages/auth/LoginPage.jsx'));
@@ -55,6 +56,7 @@ const AdminSettingsPage = lazy(() => import('@/pages/admin/AdminSettingsPage.jsx
 const stub = (title) => ({ element: <PlaceholderPage title={title} /> });
 
 export const router = createBrowserRouter([
+  { path: ROUTES.GET_FUNDING, element: <FundingWizardPage /> },
   {
     element: <PublicLayout />,
     children: [

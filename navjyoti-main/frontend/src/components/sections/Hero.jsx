@@ -40,8 +40,8 @@ const Hero = () => (
         </motion.p>
 
         <motion.div {...fade(0.24)} className="mt-8 flex flex-wrap gap-4">
-          <Button as={Link} to={ROUTES.REGISTER} size="lg" rightIcon={<FiArrowRight />}>
-            Apply Now
+          <Button as={Link} to={ROUTES.GET_FUNDING} size="lg" rightIcon={<FiArrowRight />}>
+            Get Funding
           </Button>
           <Button as={Link} to={ROUTES.EMI_CALCULATOR} variant="glass" size="lg">
             Calculate EMI

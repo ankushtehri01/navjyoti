@@ -9,6 +9,7 @@ export { Loan } from './loan.model.js';
 export { Application } from './application.model.js';
 export { Document } from './document.model.js';
 export { Contact } from './contact.model.js';
+export { FundingInquiry } from './fundingInquiry.model.js';
 export { Blog } from './blog.model.js';
 export { FAQ } from './faq.model.js';
 export { Notification } from './notification.model.js';
